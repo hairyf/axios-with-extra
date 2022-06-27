@@ -24,4 +24,5 @@ npm install axios-with-extra
 - [withLoadingHelper](src/loading-helper/index.md)
 - [withExtraParams](src/params-extra/index.md)
 - [withFilterParams](src/params-filter/index.md)
-- [withRequestRetry](src/request-retry/index.md)
+- [withRequestRetry](https://github.com/softonic/axios-retry)
+- [withAuthRefresh](https://github.com/Flyrell/axios-auth-refresh)
