@@ -1,0 +1,41 @@
+{
+  "name": "axios-with-extra",
+  "version": "1.0.0-bate.0",
+  "description": "",
+  "main": "index.js",
+  "publishConfig": {
+    "main": "index.cjs.js",
+    "types": "./index.d.ts",
+    "module": "./index.esm.js",
+    "unpkg": "./index.iife.min.js",
+    "jsdelivr": "./index.iife.min.js",
+    "exports": {
+      ".": {
+        "import": "./index.esm.js",
+        "require": "./index.cjs.js"
+      },
+      "./*": "./*"
+    },
+    "directory": "dist"
+  },
+  "scripts": {
+    "build": "ptsup src/index.ts --dts --minify --meta --platform browser"
+  },
+  "keywords": [
+    "axios",
+    "extra",
+    "axios-extra"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@hairy/libcore": "^0.2.0",
+    "axios": "0.27.2",
+    "lodash": "^4"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4",
+    "ptsup": "^0.0.8",
+    "vitest": "^0.16.0"
+  }
+}
