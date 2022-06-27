@@ -1,4 +1,5 @@
 import { AxiosStatic, AxiosInstance, AxiosResponse } from 'axios'
+import { isArray } from 'lodash'
 /**
  * 根据 expands 规则合并 response 和 data
  *
@@ -9,16 +10,20 @@ import { AxiosStatic, AxiosInstance, AxiosResponse } from 'axios'
  * @param axios
  * @param expands
  */
-export const withAssignResponse = (axios: AxiosStatic | AxiosInstance, expands: '*' | string[] = '*') => {
-  const extend = (target: any, source: any, key: string) => {
-    source[key] && (target[key] = source[key])
+export const withAssignResponse = (axios: AxiosStatic | AxiosInstance, expands: '*' | (string | [string, string])[] = '*') => {
+  const extend = (target: any, source: any, filed: string, key = filed) => {
+    source[filed] && (target[key] = source[filed])
   }
   const assign = (response: AxiosResponse, data: any) => {
     if (data && typeof data && !Array.isArray(data))
       if (expands === '*') {
         for (const key of Object.keys(data)) extend(response, data, key)
       } else {
-        for (const key of expands) extend(response, data, key)
+        for (const keys of expands) {
+          const filed = isArray(keys) ? keys[0] : keys
+          const key = isArray(keys) ? keys[1] : keys
+          extend(response, data, key, filed)
+        }
       }
   }
   axios.interceptors.response.use(
