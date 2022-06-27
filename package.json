@@ -1,6 +1,6 @@
 {
   "name": "axios-with-extra",
-  "version": "1.0.0-bate.1",
+  "version": "1.0.0-bate.2",
   "description": "",
   "main": "index.js",
   "publishConfig": {
@@ -31,6 +31,7 @@
   "dependencies": {
     "@hairy/libcore": "^0.2.0",
     "axios": "0.27.2",
+    "axios-retry": "^3.2.5",
     "lodash": "^4"
   },
   "devDependencies": {

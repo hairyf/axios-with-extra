@@ -8,7 +8,7 @@ Has axios extra (axios interceptors) used by most business scenarios
 
 ## Why?
 
-I am tired of repetitive code
+I'm tired of duplicate code and scattered packages
 
 ## Install
 
@@ -24,3 +24,4 @@ npm install axios-with-extra
 - [withLoadingHelper](src/loading-helper/index.md)
 - [withExtraParams](src/params-extra/index.md)
 - [withFilterParams](src/params-filter/index.md)
+- [withRequestRetry](src/request-retry/index.md)
