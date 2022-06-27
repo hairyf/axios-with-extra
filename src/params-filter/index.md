@@ -1,13 +1,13 @@
-### axiosWithPickByParams
+### axioswithFilterParams
 
 过滤请求中不必要的参数
 
 ~~~typescript
 
 import axios from 'axios'
-import { axiosWithPickByParams } from '@hairy/axios'
+import { axioswithFilterParams } from '@hairy/axios'
 
-axiosWithPickByParams(axios, ['', undefined], {
+axioswithFilterParams(axios, ['', undefined], {
   header: true,
   formData: true,
   // 深处处理

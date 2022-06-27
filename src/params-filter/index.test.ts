@@ -8,14 +8,14 @@
  */
 
 import axios from 'axios'
-import { withPickByParams } from '.'
+import { withFilterParams } from '.'
 
 axios.defaults['baseURL'] = 'https://jsonplaceholder.typicode.com'
 
-describe('withPickByParams', () => {
+describe('withFilterParams', () => {
   it('axios pickBy params.', async () => {
     const http = axios.create()
-    withPickByParams(http, ['', undefined])
+    withFilterParams(http, ['', undefined])
     const v = await http.get('/albums', {
       params: { aaa: '', bbb: undefined, ccc: '123131' }
     })
@@ -23,7 +23,7 @@ describe('withPickByParams', () => {
   })
   it('axios pickBy data.', async () => {
     const http = axios.create()
-    withPickByParams(http, ['', undefined])
+    withFilterParams(http, ['', undefined])
     const v = await http.post('/albums', {
       aaa: '',
       bbb: undefined,
@@ -34,7 +34,7 @@ describe('withPickByParams', () => {
   // TODO
   it.skip('axios pickBy FormData', async () => {
     const http = axios.create()
-    withPickByParams(http, [''], { formData: true })
+    withFilterParams(http, [''], { formData: true })
     const formData = new FormData()
     formData.append('aaa', '')
     formData.append('ccc', '123131')

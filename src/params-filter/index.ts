@@ -2,7 +2,7 @@ import { formDataToObject, isFormData, objectToFormData, pickByParams } from '@h
 import isPlainObject from 'lodash/isPlainObject'
 import { AxiosStatic, AxiosInstance } from 'axios'
 
-export interface WithPickByParamsOptions {
+export interface withFilterParamsOptions {
   /** 是否过滤请求头, 默认 false */
   header?: boolean
   /** 是否过滤请求体, 默认 true */
@@ -19,10 +19,10 @@ export interface WithPickByParamsOptions {
  * @param axios 实例
  * @param filters 过滤参数
  */
-export const withPickByParams = (
+export const withFilterParams = (
   axios: AxiosStatic | AxiosInstance,
   filters: any[],
-  option: WithPickByParamsOptions = {}
+  option: withFilterParamsOptions = {}
 ) => {
   const { header = false, data = true, params = true, deep = false, formData = true } = option
   axios.interceptors.request.use((config) => {

@@ -23,4 +23,4 @@ npm install axios-with-extra
 - [withErrorHelper](src/error-helper/index.md)
 - [withLoadingHelper](src/loading-helper/index.md)
 - [withExtraParams](src/params-extra/index.md)
-- [withPickByParams](src/params-pick-by/index.md)
+- [withFilterParams](src/params-filter/index.md)
