@@ -5,7 +5,7 @@
 ~~~typescript
 
 import axios from 'axios'
-import { withFilterParams } from '@hairy/axios'
+import { withFilterParams } from 'axios-with-extra'
 
 withFilterParams(axios, ['', undefined], {
   header: true,

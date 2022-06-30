@@ -6,7 +6,7 @@
 ~~~typescript
 
 import axios from 'axios'
-import { withRequestCache } from '@hairy/axios'
+import { withRequestCache } from 'axios-with-extra'
 
 withRequestCache(axios, {
   // 默认全部请求开启缓存（不建议）

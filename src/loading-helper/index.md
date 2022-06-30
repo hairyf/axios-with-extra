@@ -4,7 +4,7 @@
 
 ~~~typescript
 import axios from 'axios'
-import { withLoadingHelper } from '@hairy/axios'
+import { withLoadingHelper } from 'axios-with-extra'
 
 withLoadingHelper(
   axios,
