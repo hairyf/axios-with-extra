@@ -2,6 +2,7 @@
 
 - 出现多个相同参数请求, 仅等待一个 promised 完成
 - 通过 local 字段（true / localStorage / sessionStorage）可缓存本地
+- 由于 axios 设计原因，直接 `axios()` 是无效的
 
 ~~~typescript
 
@@ -22,4 +23,7 @@ axios.get('xxx', {
   cache: { local: true }
 })
 
+function instance(...args) {
+  return instance.prototype.request(...args)
+}
 ~~~
