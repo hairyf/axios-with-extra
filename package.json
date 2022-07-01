@@ -19,7 +19,7 @@
     "directory": "dist"
   },
   "scripts": {
-    "build": "ptsup src/index.ts --dts --minify --meta --platform browser"
+    "build": "ptsup src/index.ts --dts --meta"
   },
   "keywords": [
     "axios",
@@ -28,17 +28,19 @@
   ],
   "author": "",
   "license": "MIT",
+  "peerDependencies": {
+    "axios": ">= 0.18 < 0.19.0 || >= 0.19.1"
+  },
   "dependencies": {
-    "@hairy/libcore": "^0.2.0",
     "async-cache-fn": "^0.0.3",
-    "axios": "0.27.2",
-    "axios-auth-refresh": "^3.3.1",
-    "axios-retry": "^3.2.5",
+    "axios-auth-refresh": "*",
+    "axios-retry": "*",
     "lodash": "^4"
   },
   "devDependencies": {
-    "@types/lodash": "^4",
-    "ptsup": "^0.0.8",
+    "@types/lodash": "^4.14.182",
+    "axios": "0.27.2",
+    "ptsup": "0.1.1",
     "vitest": "^0.16.0"
   }
 }

@@ -9,6 +9,12 @@ withErrorCustom(axios, (response) => {
   return response.data.code === 0
 })
 
+// or
+
+withErrorCustom(axios, (response) => {
+  return new AxiosError('my error')
+})
+
 ~~~
 
 ~~~typescript
