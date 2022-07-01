@@ -1,6 +1,6 @@
 {
   "name": "axios-with-extra",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "main": "index.js",
   "publishConfig": {
@@ -32,6 +32,7 @@
     "axios": ">= 0.18 < 0.19.0 || >= 0.19.1"
   },
   "dependencies": {
+    "@hairy/libcore": "0.3.0",
     "async-cache-fn": "^0.0.3",
     "axios-auth-refresh": "*",
     "axios-retry": "*",
