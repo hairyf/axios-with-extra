@@ -15,6 +15,15 @@ withRequestCache(axios, {
   local: true
 })
 
+withRequestCache(axios, {
+  // 默认全部请求开启缓存（不建议）
+  default: true,
+  local: {
+    enable: true,
+    storage: localStorage,
+  }
+})
+
 axios.get('xxx', {
   cache: true
 })

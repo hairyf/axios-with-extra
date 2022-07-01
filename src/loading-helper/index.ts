@@ -1,6 +1,6 @@
 import { AxiosStatic, AxiosInstance, AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios'
 
-export interface AxiosWithLoadingOptions {
+export interface LoadingOptions {
   /**
    * @description 当 config 某个字段的值存在时, 调用 loading 拦截
    * @default loading
@@ -20,7 +20,7 @@ export const withLoadingHelper = (
   axios: AxiosStatic | AxiosInstance,
   show: LoadingShowCallback,
   hide: LoadingHideCallback,
-  options: AxiosWithLoadingOptions = {}
+  options: LoadingOptions = {}
 ) => {
   let subscribers = 0
   const fieldName = options.fieldName || 'loading'
