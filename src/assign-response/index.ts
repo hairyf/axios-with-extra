@@ -10,22 +10,20 @@ import { AxiosStatic, AxiosInstance, AxiosResponse } from 'axios'
  * @param expands
  */
 export const withAssignResponse = (axios: AxiosStatic | AxiosInstance, expands: '*' | (string | [string, string])[] = '*') => {
-  const extend = (target: any, source: any, filed: string, key = filed) => {
-    source[filed] && (target[key] = source[filed])
-  }
   const assign = (response: AxiosResponse, data: any) => {
     if (!data || typeof data !== 'object' || Array.isArray(data))
       return
     if (!expands.length)
       return
     if (expands === '*') {
-      for (const key of Object.keys(data)) extend(response, data, key)
+      for (const key of Object.keys(data))
+        extend(response, data, key)
       return
     }
     for (const keys of expands) {
-      const filed = Array.isArray(keys) ? keys[0] : keys
-      const key = Array.isArray(keys) ? keys[1] : keys
-      extend(response, data, key, filed)
+      const field = isArray(keys) ? keys[0] : keys
+      const key = isArray(keys) ? keys[1] : keys
+      extend(response, data, field, key)
     }
   }
   axios.interceptors.response.use(
@@ -38,4 +36,14 @@ export const withAssignResponse = (axios: AxiosStatic | AxiosInstance, expands: 
       return Promise.reject(error)
     }
   )
+}
+
+
+function extend(target: any, source: any, field: string, key = field  ) {
+  if (typeof source[field] !== 'undefined')
+    target[key] = source[field]
+}
+
+function isArray(arg: any): arg is any[] {
+  return Array.isArray(arg)
 }

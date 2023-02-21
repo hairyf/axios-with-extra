@@ -28,6 +28,8 @@ describe('withAssignResponse', () => {
     const http = axios.create()
     withAssignResponse(http, [['id', 'sid']])
     const response = await http.get('/posts/1')
+
+    console.log('response.sid',response.sid)
     expect(response.id).toBeTypeOf('undefined')
     expect(response.sid).toBeTypeOf('number')
   })
