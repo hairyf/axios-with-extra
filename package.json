@@ -30,7 +30,7 @@
   "author": "",
   "license": "MIT",
   "peerDependencies": {
-    "axios": ">= 1 || >= 1.3.3"
+    "axios": ">= 1 || >= 1.3.4"
   },
   "dependencies": {
     "@hairy/libcore": "0.3.0",
