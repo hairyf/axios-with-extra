@@ -1,30 +1,75 @@
-# axios-with-extra
+# axios-extras
 
-Has axios extra (axios interceptors) used by most business scenarios
+Collection of axios interceptors for common business scenarios
 
-[![npm Package](https://img.shields.io/npm/v/axios-with-extra.svg)](https://www.npmjs.org/package/axios-with-extra)
-[![License](https://img.shields.io/npm/l/axios-with-extra.svg)](https://github.com/jprichardson/node-axios-with-extra/blob/master/LICENSE)
-[![build status](https://img.shields.io/github/workflow/status/jprichardson/node-axios-with-extra/Node.js%20CI/master)](https://github.com/jprichardson/node-axios-with-extra/actions/workflows/ci.yml?query=branch%3Amaster)
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![bundle][bundle-src]][bundle-href]
+[![JSDocs][jsdocs-src]][jsdocs-href]
+[![License][license-src]][license-href]
 
 ## Why?
 
-I'm tired of duplicate code and scattered packages
+I'm tired of duplicate code and scattered packages. so.
 
 ## Install
 
-```sh
-npm install axios-with-extra
+```bash
+npm install axios-extras
 ```
 
-## Methods
+## Usage
 
-- [withAssignResponse](src/assign-response/index.md)
-- [withErrorCustom](src/error-custom/index.md)
-- [withErrorHelper](src/error-helper/index.md)
-- [withLoadingHelper](src/loading-helper/index.md)
-- [withExtraParams](src/params-extra/index.md)
-- [withFilterParams](src/params-filter/index.md)
-- [withAuthRefresh](https://github.com/Flyrell/axios-auth-refresh)
-- [withRequestRetry](https://github.com/softonic/axios-retry)
-- [withRequestPacker](src/request-packer/index.md)
-- [withRequestCaches](src/request-caches/index.md)
+```typescript
+import axios from 'axios'
+import { withParamsExtra } from 'axios-extras'
+
+// Add extra parameters to request headers
+withParamsExtra(axios, () => ({ token: localStorage.getItem('token') }), 'headers')
+```
+
+## Features ✨
+
+- 🔄 **Response Handling** - Customize and transform API responses
+- 🚦 **Loading States** - Automatic loading state management
+- 🧹 **Parameter Filtering** - Remove unnecessary parameters from requests
+- 🔑 **Authentication** - Handle token refresh and auth headers
+- 🔁 **Request Optimization** - Caching, retrying, and request packing
+
+## Methods 🛠️
+
+- [withAssignResponse](src/assign-response/README.md) - Assign response data to specified properties
+- [withLoadingHelper](src/loading-helper/README.md) - Manage loading state automatically
+- [withParamsFilter](src/params-filter/README.md) - Filter request parameters
+- [withParamsExtra](src/params-extra/README.md) - Add extra parameters to requests
+- [withErrorCustom](src/error-custom/README.md) - Customize response error handling
+- [withErrorHelper](src/error-helper/README.md) - Global error handling
+- [withAuthRefresh](src/auth-refresh/README.md) - Token refresh handling
+- [withRequestRetry](src/request-retry/README.md) - Automatic request retry
+- [withRequestPacker](src/request-packer/README.md) - Wrap axios request methods
+- [withRequestCaches](src/request-caches/README.md) - Cache identical requests
+
+## Sponsors
+
+<p align="center">
+  <a href="https://cdn.jsdelivr.net/gh/hairyf/static/sponsors.svg">
+    <img src='https://cdn.jsdelivr.net/gh/hairyf/static/sponsors.svg'/>
+  </a>
+</p>
+
+## License
+
+[MIT](./LICENSE) License © [Hairyf](https://github.com/hairyf)
+
+<!-- Badges -->
+
+[npm-version-src]: https://img.shields.io/npm/v/axios-extras?style=flat&colorA=080f12&colorB=1fa669
+[npm-version-href]: https://npmjs.com/package/axios-extras
+[npm-downloads-src]: https://img.shields.io/npm/dm/axios-extras?style=flat&colorA=080f12&colorB=1fa669
+[npm-downloads-href]: https://npmjs.com/package/axios-extras
+[bundle-src]: https://img.shields.io/bundlephobia/minzip/axios-extras?style=flat&colorA=080f12&colorB=1fa669&label=minzip
+[bundle-href]: https://bundlephobia.com/result?p=axios-extras
+[license-src]: https://img.shields.io/github/license/hairyf/axios-extras.svg?style=flat&colorA=080f12&colorB=1fa669
+[license-href]: https://github.com/hairyf/axios-extras/blob/main/LICENSE
+[jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
+[jsdocs-href]: https://www.jsdocs.io/package/axios-extras
