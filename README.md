@@ -1,4 +1,4 @@
-# axios-extras
+# 🛹 Axios Extras
 
 Collection of axios interceptors for common business scenarios
 
@@ -8,17 +8,25 @@ Collection of axios interceptors for common business scenarios
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-## Why?
+## ✨ Features
 
-I'm tired of duplicate code and scattered packages. so.
+- 🔄 **Response Handling** - Customize and transform API responses
+- 🚦 **Loading States** - Automatic loading state management
+- 🧹 **Parameter Filtering** - Remove unnecessary parameters from requests
+- 🔑 **Authentication** - Handle token refresh and auth headers
+- 🔁 **Request Optimization** - Caching, retrying, and request packing
 
-## Install
+## 💬 Why?
+
+I'm tired of duplicate code and scattered packages. so. I decided to create a collection of axios interceptors that can be used in various business scenarios.
+
+## 📦 Install
 
 ```bash
 npm install axios-extras
 ```
 
-## Usage
+## 🚀 Usage
 
 ```typescript
 import axios from 'axios'
@@ -28,15 +36,7 @@ import { withParamsExtra } from 'axios-extras'
 withParamsExtra(axios, () => ({ token: localStorage.getItem('token') }), 'headers')
 ```
 
-## Features ✨
-
-- 🔄 **Response Handling** - Customize and transform API responses
-- 🚦 **Loading States** - Automatic loading state management
-- 🧹 **Parameter Filtering** - Remove unnecessary parameters from requests
-- 🔑 **Authentication** - Handle token refresh and auth headers
-- 🔁 **Request Optimization** - Caching, retrying, and request packing
-
-## Methods 🛠️
+## 🛠️ Methods
 
 - [withAssignResponse](src/assign-response/README.md) - Assign response data to specified properties
 - [withLoadingHelper](src/loading-helper/README.md) - Manage loading state automatically
@@ -48,15 +48,6 @@ withParamsExtra(axios, () => ({ token: localStorage.getItem('token') }), 'header
 - [withRequestRetry](src/request-retry/README.md) - Automatic request retry
 - [withRequestPacker](src/request-packer/README.md) - Wrap axios request methods
 - [withRequestCaches](src/request-caches/README.md) - Cache identical requests
-
-## Sponsors
-
-<p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/hairyf/static/sponsors.svg">
-    <img src='https://cdn.jsdelivr.net/gh/hairyf/static/sponsors.svg'/>
-  </a>
-</p>
-
 ## License
 
 [MIT](./LICENSE) License © [Hairyf](https://github.com/hairyf)
