@@ -35,6 +35,7 @@
     "release": "bumpp && pnpm publish",
     "start": "tsx src/index.ts",
     "test": "vitest",
+    "test:coverage": "vitest --coverage",
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks"
   },
@@ -48,6 +49,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "catalog:cli",
     "@antfu/ni": "catalog:cli",
+    "@vitest/coverage-v8": "catalog:",
     "axios": "catalog:",
     "bumpp": "catalog:cli",
     "eslint": "catalog:cli",

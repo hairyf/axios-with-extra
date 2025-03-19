@@ -42,10 +42,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           run_install: false
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+
       - name: Set node ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
@@ -55,4 +52,8 @@ jobs:
       - run: pnpm i -g @antfu/ni
       - run: nci
       - run: nr build
-      - run: nr test
+      - run: nr test:coverage
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
