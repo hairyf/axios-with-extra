@@ -1,46 +1,68 @@
 {
-  "name": "axios-with-extra",
-  "version": "1.2.2",
-  "description": "",
-  "main": "index.js",
-  "publishConfig": {
-    "main": "index.cjs.js",
-    "types": "./index.d.ts",
-    "module": "./index.esm.js",
-    "unpkg": "./index.iife.min.js",
-    "jsdelivr": "./index.iife.min.js",
-    "exports": {
-      ".": {
-        "import": "./index.esm.js",
-        "require": "./index.cjs.js"
-      },
-      "./*": "./*"
-    },
-    "directory": "dist"
-  },
-  "scripts": {
-    "prepublishOnly": "npm run build",
-    "build": "ptsup src/index.ts --dts --meta"
-  },
-  "keywords": [
-    "axios",
-    "extra",
-    "axios-extra"
-  ],
-  "author": "",
+  "name": "axios-extras",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.6.2",
+  "description": "_description_",
+  "author": "Hairyf <wwu710632@gmail.com>",
   "license": "MIT",
-  "peerDependencies": {
-    "axios": ">= 1 || >= 1.3.4"
+  "funding": "https://github.com/sponsors/hairyf",
+  "homepage": "https://github.com/hairyf/axios-extras#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hairyf/axios-extras.git"
+  },
+  "bugs": "https://github.com/hairyf/axios-extras/issues",
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "lint": "eslint",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && pnpm publish",
+    "start": "tsx src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "@hairy/libcore": "0.3.0",
-    "async-cache-fn": "^0.0.3",
-    "lodash": "^4.17.21"
+    "@hairy/utils": "catalog:",
+    "async-cache-fn": "catalog:"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.191",
-    "axios": "1.3.3",
-    "ptsup": "0.2.3",
-    "vitest": "^0.28.5"
+    "@antfu/eslint-config": "catalog:cli",
+    "@antfu/ni": "catalog:cli",
+    "axios": "catalog:",
+    "bumpp": "catalog:cli",
+    "eslint": "catalog:cli",
+    "lint-staged": "catalog:cli",
+    "simple-git-hooks": "catalog:cli",
+    "tinyexec": "catalog:utils",
+    "tsx": "catalog:cli",
+    "typescript": "catalog:cli",
+    "unbuild": "catalog:cli",
+    "vite": "catalog:cli",
+    "vitest": "catalog:testing",
+    "vitest-package-exports": "catalog:testing",
+    "yaml": "catalog:testing"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm i --frozen-lockfile --ignore-scripts --offline && npx lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
