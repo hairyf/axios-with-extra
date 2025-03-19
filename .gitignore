@@ -1,3 +1,11 @@
+.cache
+.DS_Store
+.idea
+*.log
+*.tgz
+coverage
+dist
+lib-cov
+logs
 node_modules
-dist/**
-pnpm-lock.yaml
+temp
