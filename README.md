@@ -38,16 +38,16 @@ withParamsExtra(axios, () => ({ token: localStorage.getItem('token') }), 'header
 
 ## 🛠️ Methods
 
-- [withAssignResponse](src/assign-response/README.md) - Assign response data to specified properties
-- [withLoadingHelper](src/loading-helper/README.md) - Manage loading state automatically
-- [withParamsFilter](src/params-filter/README.md) - Filter request parameters
-- [withParamsExtra](src/params-extra/README.md) - Add extra parameters to requests
-- [withErrorCustom](src/error-custom/README.md) - Customize response error handling
-- [withErrorHelper](src/error-helper/README.md) - Global error handling
-- [withAuthRefresh](src/auth-refresh/README.md) - Token refresh handling
-- [withRequestRetry](src/request-retry/README.md) - Automatic request retry
-- [withRequestPacker](src/request-packer/README.md) - Wrap axios request methods
-- [withRequestCaches](src/request-caches/README.md) - Cache identical requests
+- [withAssignResponse](https://github.com/hairyf/axios-extras/tree/main/src/assign-response/README.md) - Assign response data to specified properties
+- [withLoadingHelper](https://github.com/hairyf/axios-extras/tree/main/src/loading-helper/README.md) - Manage loading state automatically
+- [withParamsFilter](https://github.com/hairyf/axios-extras/tree/main/src/params-filter/README.md) - Filter request parameters
+- [withParamsExtra](https://github.com/hairyf/axios-extras/tree/main/src/params-extra/README.md) - Add extra parameters to requests
+- [withErrorCustom](https://github.com/hairyf/axios-extras/tree/main/src/error-custom/README.md) - Customize response error handling
+- [withErrorHelper](https://github.com/hairyf/axios-extras/tree/main/src/error-helper/README.md) - Global error handling
+- [withAuthRefresh](https://github.com/hairyf/axios-extras/tree/main/src/auth-refresh/README.md) - Token refresh handling
+- [withRequestRetry](https://github.com/hairyf/axios-extras/tree/main/src/request-retry/README.md) - Automatic request retry
+- [withRequestPacker](https://github.com/hairyf/axios-extras/tree/main/src/request-packer/README.md) - Wrap axios request methods
+- [withRequestCaches](https://github.com/hairyf/axios-extras/tree/main/src/request-caches/README.md) - Cache identical requests
 ## License
 
 [MIT](./LICENSE) License © [Hairyf](https://github.com/hairyf)
