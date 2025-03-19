@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { withAssignResponse } from '.'
 
-axios.defaults['baseURL'] = 'https://jsonplaceholder.typicode.com'
+axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com'
 
 describe('withAssignResponse', () => {
   it('assign all data to response', async () => {
@@ -29,7 +29,8 @@ describe('withAssignResponse', () => {
     withAssignResponse(http, [['id', 'sid']])
     const response = await http.get('/posts/1')
 
-    console.log('response.sid',response.sid)
+    // eslint-disable-next-line no-console
+    console.log('response.sid', response.sid)
     expect(response.id).toBeTypeOf('undefined')
     expect(response.sid).toBeTypeOf('number')
   })

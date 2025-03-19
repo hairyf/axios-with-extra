@@ -1,10 +1,13 @@
 import { defineConfig } from 'vitest/config'
 
-const config = defineConfig({
+export default defineConfig({
   test: {
     globals: true,
-    testTimeout: 10000
-  }
+    testTimeout: 10000,
+    server: {
+      deps: {
+        inline: ['vitest-package-exports'],
+      },
+    },
+  },
 })
-
-export default config
