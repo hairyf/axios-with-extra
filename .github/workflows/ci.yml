@@ -10,9 +10,11 @@ on:
       - main
 
 jobs:
+
   lint:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
         with:
@@ -21,7 +23,6 @@ jobs:
         with:
           node-version: lts/*
           cache: pnpm
-
       - run: pnpm i -g @antfu/ni
       - run: nci
       - run: nr lint
@@ -41,6 +42,10 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           run_install: false
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
       - name: Set node ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
