@@ -1,46 +1,68 @@
-import { formDataToObject, isFormData, objectToFormData } from '@hairy/libcore'
+import type { AxiosInstance, AxiosStatic } from 'axios'
+import { formToObject, isFormData, isPlainObject, objectToForm } from '@hairy/utils'
 import { pickByParams } from './utils'
-import isPlainObject from 'lodash/isPlainObject'
-import { AxiosStatic, AxiosInstance } from 'axios'
+
+export type FilterField = 'params' | 'data' | 'headers' | 'formData'
 
 export interface FilterParamsOptions {
-  /** 是否过滤请求头, 默认 false */
-  header?: boolean
-  /** 是否过滤请求体, 默认 true */
+  /** Whether to filter request headers, default false */
+  headers?: boolean
+  /** Whether to filter request body, default true */
   data?: boolean
-  /** 是否过滤请求参数, 默认 true */
+  /** Whether to filter request parameters, default true */
   params?: boolean
-  /** 是否过滤表单数据, 默认 true */
+  /** Whether to filter form data, default true */
   formData?: boolean
-  /** 是否深层过滤, 默认 false */
+  /** Whether to perform deep filtering, default false */
   deep?: boolean
 }
+
 /**
- * 根据过滤器, 过滤 body|params 参数
- * @param axios 实例
- * @param filters 过滤参数
+ * Filter request parameters based on specified filters
+ *
+ * This interceptor removes unwanted values from request parameters, headers, and body
+ * based on the provided filter array. It can process regular objects, nested objects,
+ * and FormData objects.
+ *
+ * @param axios - The Axios instance or static object to apply the interceptor to
+ * @param field - The request field to filter parameters from ('params', 'data', 'headers', or 'auth')
+ * @param filters - Array of values to be filtered out from requests
+ * @param option - Configuration options for filtering behavior
  */
-export const withFilterParams = (
+export function withParamsFilter(
   axios: AxiosStatic | AxiosInstance,
+  field: ('*' | FilterField | FilterField[]),
   filters: any[],
-  option: FilterParamsOptions = {}
-) => {
-  const { header = false, data = true, params = true, deep = false, formData = true } = option
+  option: FilterParamsOptions = {},
+): void {
+  const fields = field === '*'
+    ? ['params', 'data', 'headers', 'formData'] as FilterField[]
+    : Array.isArray(field) ? field : [field]
+  const deep = option.deep ?? false
+
   axios.interceptors.request.use((config) => {
-    if (header && isPlainObject(config.headers)) {
+    // Filter headers if enabled and headers is a plain object
+    if (fields.includes('headers') && isPlainObject(config.headers)) {
       config.headers = pickByParams(config.headers as any, filters, deep) as any
     }
-    if (params && isPlainObject(config.params)) {
+
+    // Filter URL parameters if enabled and params is a plain object
+    if (fields.includes('params') && isPlainObject(config.params)) {
       config.params = pickByParams(config.params, filters, deep)
     }
-    if (data && isPlainObject(config.data)) {
+
+    // Filter request body if enabled and data is a plain object
+    if (fields.includes('data') && isPlainObject(config.data)) {
       config.data = pickByParams(config.data, filters, deep)
     }
-    if (formData && isFormData(config.data)) {
-      const transformObject = formDataToObject(config.data)
+
+    // Filter FormData if enabled and data is FormData
+    if (fields.includes('formData') && isFormData(config.data)) {
+      const transformObject = formToObject(config.data)
       const pickByObject = pickByParams(transformObject, filters)
-      config.data = objectToFormData(pickByObject as Record<string, string>)
+      config.data = objectToForm(pickByObject as Record<string, string>)
     }
+
     return config
   })
 }

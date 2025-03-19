@@ -29,8 +29,6 @@ describe('withAssignResponse', () => {
     withAssignResponse(http, [['id', 'sid']])
     const response = await http.get('/posts/1')
 
-    // eslint-disable-next-line no-console
-    console.log('response.sid', response.sid)
     expect(response.id).toBeTypeOf('undefined')
     expect(response.sid).toBeTypeOf('number')
   })

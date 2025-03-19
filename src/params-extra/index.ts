@@ -1,36 +1,42 @@
-import { AxiosStatic, AxiosInstance } from 'axios'
-import { isFormData } from '@hairy/libcore'
-import isNumber from 'lodash/isNumber'
-import isString from 'lodash/isString'
-import isFunction from 'lodash/isFunction'
+import type { AxiosInstance, AxiosStatic, InternalAxiosRequestConfig } from 'axios'
+import { isFormData } from './utils'
 
+export type ExtraField = 'params' | 'data' | 'headers' | 'auth'
 /**
- * 请求时携带一些参数
- * @param axios
- * @param params
- * @param mode
+ * Add extra parameters to requests
+ *
+ * This interceptor allows you to automatically include additional parameters
+ * in every request, such as authentication tokens, API keys, or other common parameters.
+ * The extra parameters can be provided as a static object or a function that returns
+ * an object (useful for dynamic values like tokens from localStorage).
+ *
+ * @param axios - The Axios instance or static object to apply the interceptor to
+ * @param field - The request field to add parameters to ('params', 'data', 'headers', or 'auth')
+ * @param params - Object containing extra parameters or a function that returns such an object
  */
-export const withExtraParams = (
+export function withParamsExtra(
   axios: AxiosStatic | AxiosInstance,
+  field: ExtraField,
   params: object | (() => object),
-  mode: '*' | 'params' | 'data' | 'headers' = '*'
-) => {
+): void {
   axios.interceptors.request.use((config) => {
-    const assign = (path: keyof typeof config) => {
-      if (isFormData(config[path])) return
-      if (isNumber(config[path])) return
-      if (isString(config[path])) return
-      const option = isFunction(params) ? params() : params
-      config[path] = { ...option, ...config[path] }
+    const assign = (path: keyof typeof config): InternalAxiosRequestConfig<any> | undefined => {
+      // Skip if the target is FormData (can't merge objects into FormData)
+      if (isFormData(config[path]))
+        return
+
+      // Only proceed if the target is undefined or an object
+      if (typeof config[path] === 'undefined' || typeof config[path] === 'object') {
+        // Get parameters (evaluate function if params is a function)
+        const option = typeof params === 'function' ? params() : params
+
+        // Merge parameters with existing config, prioritizing existing values
+        config[path] = { ...option, ...config[path] }
+      }
     }
-    if (mode === '*') {
-      assign('params')
-      assign('data')
-      assign('headers')
-    }
-    if (mode === 'params') assign('params')
-    if (mode === 'data') assign('data')
-    if (mode === 'headers') assign('headers')
+
+    // Apply the assignment to the specified field
+    assign(field)
     return config
   })
 }

@@ -1,8 +1,8 @@
 import axios from 'axios'
-import noop from 'lodash/noop'
 import { withLoadingHelper } from '.'
 
-axios.defaults['baseURL'] = 'https://jsonplaceholder.typicode.com'
+const noop: (...args: any[]) => void = () => {}
+axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com'
 
 describe('withLoadingHelper', () => {
   it('show loading call.', async () => {
@@ -28,13 +28,13 @@ describe('withLoadingHelper', () => {
     withLoadingHelper(
       https,
       () => showCount++,
-      () => hideCount++
+      () => hideCount++,
     )
 
     await Promise.all([
       https.get('/albums', { loading: true }),
       https.get('/albums', { loading: true }),
-      https.get('/albums', { loading: true })
+      https.get('/albums', { loading: true }),
     ])
 
     expect(showCount).toBe(1)

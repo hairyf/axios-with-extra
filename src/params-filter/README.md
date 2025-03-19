@@ -16,12 +16,11 @@ import axios from 'axios'
 import { withParamsFilter } from 'axios-extras'
 
 // Filter out empty strings and undefined values
-withParamsFilter(axios, ['', undefined], {
-  // Apply to headers
-  header: true,
-  // Apply to form data
-  formData: true,
+withParamsFilter(
+  axios,
+  ['headers', 'params', 'data', 'formData'],
+  ['', undefined],
   // Process nested objects
-  deep: true
-})
+  { deep: true }
+)
 ```

@@ -1,8 +1,8 @@
-import { AxiosStatic, AxiosInstance, AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios'
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosStatic } from 'axios'
 
 export interface LoadingOptions {
   /**
-   * @description 当 config 某个字段的值存在时, 调用 loading 拦截
+   * @description Field name in config that triggers loading interceptor when its value exists
    * @default loading
    */
   fieldName?: string
@@ -10,21 +10,25 @@ export interface LoadingOptions {
 
 export type LoadingShowCallback = (config: AxiosRequestConfig) => void
 export type LoadingHideCallback = (config: AxiosRequestConfig, response?: AxiosResponse, error?: AxiosError) => void
+
 /**
- * axios 全局加载提示
- * @param axios 实例
- * @param show 展示逻辑钩子
- * @param hide 关闭逻辑钩子
+ * Global loading indicator for axios requests
+ *
+ * This interceptor manages loading state for axios requests, showing a loading indicator
+ * when requests are in progress and hiding it when all requests complete.
+ * It tracks multiple concurrent requests and only shows/hides the indicator when the first
+ * request starts and the last request completes.
+ *
+ * @param axios - The Axios instance or static object to apply the interceptor to
+ * @param show - Callback function to show the loading indicator
+ * @param hide - Callback function to hide the loading indicator
+ * @param options - Configuration options for the loading helper
  */
-export const withLoadingHelper = (
-  axios: AxiosStatic | AxiosInstance,
-  show: LoadingShowCallback,
-  hide: LoadingHideCallback,
-  options: LoadingOptions = {}
-) => {
+export function withLoadingHelper(axios: AxiosStatic | AxiosInstance, show: LoadingShowCallback, hide: LoadingHideCallback, options: LoadingOptions = {}): void {
   let subscribers = 0
   const fieldName = options.fieldName || 'loading'
   const isLoading = (config: any): boolean => !!config?.[fieldName]
+
   axios.interceptors.request.use((config) => {
     if (isLoading(config)) {
       !subscribers && show(config)
@@ -32,6 +36,7 @@ export const withLoadingHelper = (
     }
     return config
   })
+
   axios.interceptors.response.use(
     (response) => {
       if (isLoading(response.config)) {
@@ -46,7 +51,7 @@ export const withLoadingHelper = (
         !subscribers && hide(error.config, undefined, error)
       }
       return Promise.reject(error)
-    }
+    },
   )
 }
 
