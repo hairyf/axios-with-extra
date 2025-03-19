@@ -1,6 +1,6 @@
 # 🛹 Axios Extras
 
-Collection of axios interceptors for common business scenarios
+Has axios extra (axios interceptors) used by most business scenarios
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
